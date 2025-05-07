@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "reset-db": "psql -U postgres -d postgres -f data/data.sql"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",

@@ -1,5 +1,10 @@
 import pool from '../config/db.js';
 
+export const getUserByEmailService = async (email) => {
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    return result.rows[0];
+};
+
 export const getAllUsersService = async () => {
     const result = await pool.query('SELECT * FROM users');
     return result.rows;
@@ -10,8 +15,11 @@ export const getUserByIdService = async (id) => {
     return result.rows[0];
 };
 
-export const createUserService = async (email, password) => {
-    const result = await pool.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *", [email, password]);
+export const createUserService = async (email, password, name, country) => {
+    const result = await pool.query(
+        "INSERT INTO users (email, password, name, country) VALUES ($1, $2, $3, $4) RETURNING *", 
+        [email, password, name, country]
+    );
     return result.rows[0];
 };
 

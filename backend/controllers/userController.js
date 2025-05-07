@@ -1,21 +1,11 @@
-import  {getAllUsersService,getUserByIdService,createUserService,updateUserService,deleteUserService}  from "../models/userModel.js";   
+import { getAllUsersService, getUserByIdService, updateUserService, deleteUserService } from "../models/userModel.js";   
 
-const handleResponse = (res, status,message ,data = null) =>{
+const handleResponse = (res, status, message, data = null) => {
     return res.status(status).json({
         status,
         message,
-        data});
-}
-
-export const createUser = async (req, res, next) => {
-    const {email,password} = req.body;
-    
-    try{
-        const newUser = await createUserService(email,password);
-        handleResponse(res,201,"User created successfully",newUser)
-    }catch(error){
-        next(error);
-    };
+        data
+    });
 };
 
 export const getAllUsers = async (req, res, next) => {
